@@ -1,0 +1,139 @@
+@property --a { /* must register --a to animate it */
+	syntax: '<angle>';
+	initial-value: 0deg;
+	/* used only on pseudo, nowhere to be inherited, 
+	 * better perf if set false, see 
+	 * https://www.bram.us/2024/10/03/benchmarking-the-performance-of-css-property/ */
+	inherits: false
+}
+
+:root {
+    --primary-color: #00bcd4; /* Cyan */
+    --secondary-color: #00838f; /* Darker Teal */
+    --background-color: rgba(255, 255, 255, 0.1);
+    --card-background: rgba(255, 255, 255, 0.2);
+}
+
+.glow {
+	position: relative;
+	width: Min(12.5em, 80vmin);
+	aspect-ratio: 1;
+	margin-top: 8rem;
+    margin-bottom: 8rem;
+	place-self: center;
+	place-content: center;
+	padding: 1em;
+	color: #ededed;
+	font: clamp(1em, 2vw + 2vh, 2em) sans-serif;
+	text-align: center;
+	text-transform: uppercase;
+	text-wrap: balance
+}
+
+.glow::before {
+	position: absolute;
+	z-index: -1;
+	inset: -1em;
+	border: solid 1.25em;
+	border-image: 
+    conic-gradient(from var(--a), #e0ffff, #b2ebf2, #80deea, 
+    #4dd0e1, #26c6da, #00bcd4, #00acc1, 
+    #0097a7, #00838f, #006064, #004d40) 1;
+
+	filter: blur(.75em);
+	animation: a 4s linear infinite;
+	content: ''
+}
+
+@keyframes a { to { --a: 1turn } }
+
+
+html, body, div { display: grid }
+
+html { min-height: 100% }
+
+body {
+	background-image: linear-gradient(rgb(31, 70, 77), rgba(0,0,0,1));
+    background-blend-mode: multiply;
+}
+
+.about,
+.projects,
+.contact {
+    padding: 3em;
+    text-align: center;
+    border-radius: 10px;
+    margin: 2em auto;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    font: clamp(1em, 2vw + 2vh, 2em) sans-serif;
+    color: #fff;
+}
+
+.about h2,
+.projects h2,
+.contact h2 {
+    margin-bottom: 1em;
+    font-size: clamp(1.5em, 3vw + 1em, 2.5em);
+}
+
+.project-card {
+    background-color: var(--card-background);
+    margin: 1em auto;
+    padding: 1.5em;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+}
+
+form {
+    display: grid;
+    gap: 1em;
+    max-width: 400px;
+    margin: auto;
+}
+
+input,
+textarea {
+    padding: 0.7em;
+    border-radius: 4px;
+    border: none;
+    background-color: #ffffff; /* Light background for inputs */
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #999; /* Placeholder color */
+}
+
+button {
+    padding: 0.7em;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; 
+}
+
+button:hover {
+    background-color: var(--secondary-color); /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+   .glow {
+       width: calc(100% - 2em);
+   }
+
+   .about,
+   .projects,
+   .contact {
+       padding: 2em; /* Reduce padding on smaller screens */
+   }
+}

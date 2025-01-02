@@ -90,10 +90,58 @@ a:visited {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .glow:hover {
     box-shadow: 0 0 50px #fff,
                 0 0 100px #fff;
+}
+
+
+.parent {
+    background-color: aqua;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.child {
+    font-size: 20px;
+    display: flex;
+    width: 50px;
+    height: 50px;
+    color: black;
+}
+
+.Box {
+    display: flex;
+    justify-content: space-around;
+    align-items:end;
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    color: #000;
+}
+
+.Box-child {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    border: 2px solid red;
+}
+
+
+@media (min-width: 786px) {
+    .child {
+        font-size: 30px;
+        background-color: red;
+    }
+
+    .parent {
+        flex-direction: row;
+    }
 }
